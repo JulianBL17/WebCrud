@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/05/2022 06:46:23 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Proveedores" table="proveedores" catalog="bd_crud" optimistic-lock="version">
+        <id name="idProveedor" type="java.lang.Integer">
+            <column name="id_proveedor" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="30" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="Apellido" length="30" not-null="true" />
+        </property>
+        <property name="identificacion" type="string">
+            <column name="Identificacion" length="10" not-null="true" />
+        </property>
+        <property name="empresa" type="string">
+            <column name="Empresa" length="40" not-null="true" />
+        </property>
+        <property name="telefono" type="int">
+            <column name="Telefono" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h2 style="background-color: palegoldenrod">CRUD PRESENTADO POR JULIAN BOLAÑOS</h2>
+        <title>Tabla Proveedores</title>
+        
+    </h:head>
+    <h:body>
+
+
+        <h:form>
+            <p:commandButton value="Agregar Proveedor" actionListener="#{proveedoresControl.limpiarProveedores()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+            <p:separator/>
+        </h:form>
+
+        <h:form id="formListado">
+            <p:dataTable id="tablaBancos" paginator="true" paginatorPosition="bottom" rows="10" var="proveedores" value="#{proveedoresControl.listaProveedores}" emptyMessage="No existen proveedoress">
+
+                <p:column headerText="ID proveedores">
+                    <h:outputText value="#{proveedores.idProveedor}" />
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{proveedores.nombre}" />
+                </p:column>
+
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{proveedores.apellido}" />
+                </p:column>
+
+                <p:column headerText="Identificacion">
+                    <h:outputText value="#{proveedores.identificacion}" />
+                </p:column>
+
+                <p:column headerText="Empresa">
+                    <h:outputText value="#{proveedores.empresa}" />
+                </p:column>
+
+                <p:column headerText="Telefono">
+                    <h:outputText value="#{proveedores.telefono}" />
+                </p:column>
+
+
+
+
+                <p:column headerText="MODIFICAR" style="text-align: center">
+                    <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
+                        <f:setPropertyActionListener target="#{proveedoresControl.proveedores}" value="#{proveedores}"/>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="ELIMINAR" style="text-align: center">
+                    <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();" update=":formEliminar">
+                        <f:setPropertyActionListener target="#{proveedoresControl.proveedores}" value="#{proveedores}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+        <h:form id="formAgregar">
+            <p:dialog id="dlgAgregar" header="Agregar Proveedor" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                    <p:outputLabel value="Nombre:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.nombre}"/>
+                    <p:outputLabel value="Apellido:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.apellido}"/>
+                    <p:outputLabel value="Identificacion:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.identificacion}"/>
+                    <p:outputLabel value="Empresa:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.empresa}"/>
+                    <p:outputLabel value="Telefono:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.telefono}"/>
+                </p:panelGrid>
+                <p:commandButton  value="Guardar" actionListener="#{proveedoresControl.agregarProveedores()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoAgregar').hide();"/>
+                <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formModificar">
+            <p:dialog id="dlgModificar" header="Modificar Proveedor" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <p:panelGrid columns="2" style="margin: 0 auto;">                                
+                    <p:outputLabel value="Nombre:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.nombre}"/>
+                    <p:outputLabel value="Apellido:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.apellido}"/>
+                    <p:outputLabel value="Identificacion:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.identificacion}"/>
+                    <p:outputLabel value="Empresa:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.empresa}"/>
+                    <p:outputLabel value="Telefono:"/>
+                    <p:inputText value="#{proveedoresControl.proveedores.telefono}"/>
+
+                </p:panelGrid>
+                <p:commandButton  value="Guardar" actionListener="#{proveedoresControl.modificarProveedores()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoModificar').hide();"/>
+                <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+        <h:form id="formEliminar">
+            <p:dialog id="dlgEliminar" header="Eliminar Proveedor" widgetVar="dialogoEliminar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <h:outputText value="Desea eliminar este registro?"/>
+                <p:commandButton  value="Si" actionListener="#{proveedoresControl.eliminarProveedores()}" update=":formListado:tablaBancos" oncomplete="PF('dialogoEliminar').hide();"/>
+                <p:commandButton  value="No" onclick="PF('dialogoEliminar').hide();"/>
+            </p:dialog>
+        </h:form>
+
+    </h:body>
+</html>
